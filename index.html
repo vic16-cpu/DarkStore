@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;900&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,56 +24,93 @@
             <h1 class="title-dark">DARK</h1>
             <h2 class="title-store">STORE</h2>
         </div>
-        <p class="subtitle">Os melhores itens de Blox Fruits em um só lugar.</p>
-        <button class="cta-button">VER OFERTAS</button>
+        <p class="subtitle">Itens raros e exclusivos.</p>
     </main>
 
     <section class="vitrine">
-        <h3 class="categoria-titulo">Blox Fruits</h3>
-        
+        <h3 class="categoria-titulo">Blox Fruits - Raça V4</h3>
         <div class="produtos-grid">
             
-            <div class="card">
+            <div class="card" onclick="abrirModal('ghoul')">
                 <div class="img-placeholder"></div>
                 <p>Raça V4 Ghoul</p>
                 <span class="preco">R$ 21,59</span>
-                <button class="btn-comprar">Comprar</button>
+                <button class="btn-detalhes">Ver Detalhes</button>
             </div>
 
-            <div class="card">
+            <div class="card" onclick="abrirModal('human')">
                 <div class="img-placeholder"></div>
                 <p>Raça V4 Human</p>
                 <span class="preco">R$ 21,59</span>
-                <button class="btn-comprar">Comprar</button>
+                <button class="btn-detalhes">Ver Detalhes</button>
             </div>
 
-            <div class="card">
+            <div class="card" onclick="abrirModal('shark')">
                 <div class="img-placeholder"></div>
                 <p>Raça V4 Shark</p>
                 <span class="preco">R$ 21,59</span>
-                <button class="btn-comprar">Comprar</button>
+                <button class="btn-detalhes">Ver Detalhes</button>
             </div>
 
-            <div class="card">
+            <div class="card" onclick="abrirModal('mink')">
                 <div class="img-placeholder"></div>
                 <p>Raça V4 Mink</p>
                 <span class="preco">R$ 21,59</span>
-                <button class="btn-comprar">Comprar</button>
+                <button class="btn-detalhes">Ver Detalhes</button>
             </div>
 
-            <div class="card">
+            <div class="card" onclick="abrirModal('angel')">
                 <div class="img-placeholder"></div>
                 <p>Raça V4 Angel</p>
                 <span class="preco">R$ 21,59</span>
-                <button class="btn-comprar">Comprar</button>
+                <button class="btn-detalhes">Ver Detalhes</button>
             </div>
 
-            <div class="card">
+            <div class="card" onclick="abrirModal('cyborg')">
                 <div class="img-placeholder"></div>
                 <p>Raça V4 Cyborg</p>
                 <span class="preco">R$ 21,59</span>
-                <button class="btn-comprar">Comprar</button>
+                <button class="btn-detalhes">Ver Detalhes</button>
             </div>
+
+             <div class="card" onclick="abrirModal('draco')">
+                <div class="img-placeholder"></div>
+                <p>Raça V4 Draco</p>
+                <span class="preco">R$ 21,59</span>
+                <button class="btn-detalhes">Ver Detalhes</button>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="modalProduto" class="modal-fundo">
+        <div class="modal-conteudo">
+            <span class="fechar" onclick="fecharModal()">&times;</span>
+            
+            <div class="modal-flex">
+                <div class="modal-img-area">
+                    <div id="modal-img-box"></div> 
+                </div>
+                
+                <div class="modal-info-area">
+                    <h2 id="modal-nome">Nome do Produto</h2>
+                    <p id="modal-desc">Descrição detalhada vai aqui.</p>
+                    
+                    <div class="info-extra">
+                        <span id="modal-stock" class="stock-badge">Estoque: 0</span>
+                    </div>
+
+                    <h3 id="modal-preco">R$ 00,00</h3>
+                    
+                    <button class="btn-comprar-modal">ADICIONAR AO CARRINHO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
 
              <div class="card">
                 <div class="img-placeholder"></div>
