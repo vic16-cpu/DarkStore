@@ -38,7 +38,7 @@
         <div class="grid-produtos">
             
             <div class="card" onclick="abrirModal('ghoul')">
-                <div class="card-img"></div>
+                <div class="card-img" style="background-image: url('https://placehold.co/400x300/0f0f0f/ff3333?text=GHOUL+V4');"></div>
                 <div class="card-info">
                     <h3>Ghoul V4</h3>
                     <div class="preco-tag">R$ 21,59</div>
@@ -47,7 +47,7 @@
             </div>
 
             <div class="card" onclick="abrirModal('human')">
-                <div class="card-img"></div>
+                <div class="card-img" style="background-image: url('https://placehold.co/400x300/0f0f0f/ff8800?text=HUMAN+V4');"></div>
                 <div class="card-info">
                     <h3>Human V4</h3>
                     <div class="preco-tag">R$ 21,59</div>
@@ -56,7 +56,7 @@
             </div>
 
             <div class="card" onclick="abrirModal('shark')">
-                <div class="card-img"></div>
+                <div class="card-img" style="background-image: url('https://placehold.co/400x300/0f0f0f/0088ff?text=SHARK+V4');"></div>
                 <div class="card-info">
                     <h3>Shark V4</h3>
                     <div class="preco-tag">R$ 21,59</div>
@@ -65,7 +65,7 @@
             </div>
 
             <div class="card" onclick="abrirModal('mink')">
-                <div class="card-img"></div>
+                <div class="card-img" style="background-image: url('https://placehold.co/400x300/0f0f0f/ffee00?text=MINK+V4');"></div>
                 <div class="card-info">
                     <h3>Mink V4</h3>
                     <div class="preco-tag">R$ 21,59</div>
@@ -74,7 +74,64 @@
             </div>
 
             <div class="card" onclick="abrirModal('angel')">
-                <div class="card-img"></div>
+                <div class="card-img" style="background-image: url('https://placehold.co/400x300/0f0f0f/ffffff?text=ANGEL+V4');"></div>
+                <div class="card-info">
+                    <h3>Angel V4</h3>
+                    <div class="preco-tag">R$ 21,59</div>
+                    <button class="btn-card">VER DETALHES</button>
+                </div>
+            </div>
+
+            <div class="card" onclick="abrirModal('cyborg')">
+                <div class="card-img" style="background-image: url('https://placehold.co/400x300/0f0f0f/b026ff?text=CYBORG+V4');"></div>
+                <div class="card-info">
+                    <h3>Cyborg V4</h3>
+                    <div class="preco-tag">R$ 21,59</div>
+                    <button class="btn-card">VER DETALHES</button>
+                </div>
+            </div>
+
+            <div class="card" onclick="abrirModal('draco')">
+                <div class="card-img" style="background-image: url('https://placehold.co/400x300/0f0f0f/ff0000?text=DRACO+V4');"></div>
+                <div class="card-info">
+                    <h3>Draco V4</h3>
+                    <div class="preco-tag">R$ 21,59</div>
+                    <button class="btn-card">VER DETALHES</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-box">
+            <button class="btn-fechar" onclick="fecharModal()">&times;</button>
+            
+            <div class="modal-body">
+                <div class="modal-esquerda">
+                    <div class="modal-imagem-placeholder"></div>
+                </div>
+                
+                <div class="modal-direita">
+                    <h2 id="m-nome">NOME DO ITEM</h2>
+                    <span id="m-stock" class="badge-estoque">Estoque: 0</span>
+                    
+                    <p id="m-desc">Descrição do item aqui...</p>
+                    
+                    <div class="modal-preco-area">
+                        <span class="label">Preço:</span>
+                        <span id="m-preco" class="valor-grande">R$ 00,00</span>
+                    </div>
+
+                    <button class="btn-comprar-final">ADICIONAR AO CARRINHO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
                 <div class="card-info">
                     <h3>Angel V4</h3>
                     <div class="preco-tag">R$ 21,59</div>
