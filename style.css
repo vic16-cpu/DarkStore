@@ -1,27 +1,133 @@
-body {
-    background-color: #222; /* Cor de fundo cinza escuro */
-    color: white; /* Cor do texto */
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    height: 100vh; /* Altura total da tela */
+/* Zerar as margens para não ficar buraco branco */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.container {
-    text-align: center;
-    padding: 20px;
-    border: 2px solid #4caf50; /* Borda verde */
-    border-radius: 10px;
-}
-
-button {
-    background-color: #4caf50;
+body {
+    background-color: #050505; /* Preto quase absoluto */
     color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* --- Cabeçalho --- */
+header {
+    padding: 20px;
+    position: absolute; /* Fica por cima de tudo */
+    width: 100%;
+    top: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav a {
+    color: #888;
+    text-decoration: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: white; /* Fica branco ao passar o mouse */
+}
+
+/* --- O Logo DARK STORE --- */
+.hero {
+    height: 80vh; /* Ocupa 80% da altura da tela */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%); /* Luz sutil no fundo */
+}
+
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.title-dark {
+    font-size: 5rem; /* Tamanho gigante */
+    font-weight: 900; /* Super negrito */
+    line-height: 0.9; /* Aproxima as linhas */
+    background: -webkit-linear-gradient(#fff, #666); /* Degradê no texto */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.title-store {
+    font-size: 1.2rem;
+    font-weight: 300; /* Fonte fina */
+    letter-spacing: 15px; /* ESPAÇAMENTO CHIQUE */
+    margin-left: 15px; /* Ajuste para centralizar visualmente por causa do espaçamento */
+    color: #a855f7; /* Um roxo neon sutil (pode mudar para a cor que quiser) */
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+/* --- Botão --- */
+.cta-button {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 15px 40px;
+    font-size: 14px;
+    letter-spacing: 2px;
     cursor: pointer;
-    font-size: 16px;
+    transition: 0.3s;
+}
+
+.cta-button:hover {
+    background: white;
+    color: black;
+    box-shadow: 0 0 20px rgba(255,255,255,0.3); /* Brilho ao tocar */
+}
+
+/* --- Vitrine --- */
+.vitrine {
+    padding: 40px 20px;
+    background-color: #0a0a0a;
+}
+
+.vitrine h3 {
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 1rem;
+    color: #444;
+}
+
+.produtos-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #111;
+    padding: 15px;
+    width: 150px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.img-placeholder {
+    width: 100%;
+    height: 120px;
+    background-color: #222;
+    margin-bottom: 10px;
+    border-radius: 4px;
 }
