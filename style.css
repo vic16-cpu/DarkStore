@@ -6,14 +6,14 @@ const produtosDB = {
         desc: "A melhor escolha para PvP noturno. Inclui regeneração de vida vampírica e velocidade aprimorada.",
         estoque: 15,
         // Link da imagem (pode trocar pelo seu link real depois)
-        img: "https://placehold.co/600x400/0f0f0f/ff3333?text=GHOUL+V4+FULL"
+        img: "https://pin.it/7tQlShXSK"
     },
     'human': {
         nome: "RAÇA HUMAN V4",
         preco: "R$ 21,59",
         desc: "Dano bruto e imparável. A Raça Human V4 possui o medidor de Rage que torna seus ataques devastadores.",
         estoque: 8,
-        img: "https://share.google/images/AT7eWMvokRLatzKBH"
+        img: "https://placehold.co/600x400/0f0f0f/0088ff?text=HUMAN+V4+FULL"
     },
     'shark': {
         nome: "RAÇA SHARK V4",
