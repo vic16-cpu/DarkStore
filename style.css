@@ -131,3 +131,114 @@ nav a:hover {
     margin-bottom: 10px;
     border-radius: 4px;
 }
+
+/* --- Estilos do Modal (Janela Pop-up) --- */
+.modal-fundo {
+    display: none; /* Começa escondido */
+    position: fixed;
+    z-index: 1000; /* Fica na frente de tudo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Fundo preto transparente */
+    backdrop-filter: blur(5px); /* Desfoque no fundo */
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-conteudo {
+    background-color: #111;
+    border: 1px solid #a855f7; /* Borda roxa neon */
+    border-radius: 15px;
+    width: 90%;
+    max-width: 700px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.2);
+    animation: abrirSuave 0.3s;
+}
+
+@keyframes abrirSuave {
+    from {transform: scale(0.8); opacity: 0;}
+    to {transform: scale(1); opacity: 1;}
+}
+
+.fechar {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.fechar:hover { color: #a855f7; }
+
+.modal-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.modal-img-area {
+    flex: 1;
+    min-width: 250px;
+}
+
+#modal-img-box {
+    width: 100%;
+    height: 250px;
+    background-color: #222;
+    border-radius: 10px;
+    background-image: url('https://placehold.co/400x400/111/a855f7?text=DARK+ITEM'); /* Imagem provisória */
+    background-size: cover;
+    background-position: center;
+}
+
+.modal-info-area {
+    flex: 1.5;
+    text-align: left;
+}
+
+#modal-nome {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+#modal-desc {
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.stock-badge {
+    background-color: #222;
+    color: #4caf50;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    border: 1px solid #4caf50;
+}
+
+#modal-preco {
+    font-size: 2rem;
+    color: #a855f7;
+    margin: 20px 0;
+}
+
+.btn-comprar-modal {
+    background-color: #a855f7;
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
