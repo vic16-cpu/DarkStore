@@ -3,78 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Store | Blox Fruits</title>
+    <title>Dark Store | V4 Edition</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <nav>
-            <a href="#">Início</a>
-            <a href="#">Blox Fruits</a>
-            <a href="#">Carrinho (0)</a>
+            <a href="#">Loja</a>
+            <a href="#">Rankings</a>
+            <a href="#" class="nav-cart">Carrinho</a>
         </nav>
     </header>
 
     <main class="hero">
-        <div class="logo-container">
-            <h1 class="title-dark">DARK</h1>
-            <h2 class="title-store">STORE</h2>
+        <div class="hero-content">
+            <h1>DARK <span class="destaque-roxo">STORE</span></h1>
+            <p>Domine o Blox Fruits com a elite das Raças V4.</p>
+            <button class="btn-neon-main">ACESSAR CATÁLOGO</button>
         </div>
-        <p class="subtitle">Itens raros e exclusivos.</p>
     </main>
 
     <section class="vitrine">
-        <h3 class="categoria-titulo">Blox Fruits - Raça V4</h3>
-        <div class="produtos-grid">
+        <div class="titulo-area">
+            <h2>RAÇAS <span class="outline">V4</span></h2>
+            <div class="linha-decorativa"></div>
+        </div>
+
+        <div class="grid-produtos">
             
             <div class="card" onclick="abrirModal('ghoul')">
-                <div class="img-placeholder"></div>
-                <p>Raça V4 Ghoul</p>
-                <span class="preco">R$ 21,59</span>
-                <button class="btn-detalhes">Ver Detalhes</button>
+                <div class="card-img"></div>
+                <div class="card-info">
+                    <h3>Ghoul V4</h3>
+                    <div class="preco-tag">R$ 21,59</div>
+                    <button class="btn-card">VER DETALHES</button>
+                </div>
             </div>
 
             <div class="card" onclick="abrirModal('human')">
-                <div class="img-placeholder"></div>
-                <p>Raça V4 Human</p>
-                <span class="preco">R$ 21,59</span>
-                <button class="btn-detalhes">Ver Detalhes</button>
+                <div class="card-img"></div>
+                <div class="card-info">
+                    <h3>Human V4</h3>
+                    <div class="preco-tag">R$ 21,59</div>
+                    <button class="btn-card">VER DETALHES</button>
+                </div>
             </div>
 
             <div class="card" onclick="abrirModal('shark')">
-                <div class="img-placeholder"></div>
-                <p>Raça V4 Shark</p>
-                <span class="preco">R$ 21,59</span>
-                <button class="btn-detalhes">Ver Detalhes</button>
+                <div class="card-img"></div>
+                <div class="card-info">
+                    <h3>Shark V4</h3>
+                    <div class="preco-tag">R$ 21,59</div>
+                    <button class="btn-card">VER DETALHES</button>
+                </div>
             </div>
 
             <div class="card" onclick="abrirModal('mink')">
-                <div class="img-placeholder"></div>
-                <p>Raça V4 Mink</p>
-                <span class="preco">R$ 21,59</span>
-                <button class="btn-detalhes">Ver Detalhes</button>
+                <div class="card-img"></div>
+                <div class="card-info">
+                    <h3>Mink V4</h3>
+                    <div class="preco-tag">R$ 21,59</div>
+                    <button class="btn-card">VER DETALHES</button>
+                </div>
             </div>
 
             <div class="card" onclick="abrirModal('angel')">
-                <div class="img-placeholder"></div>
-                <p>Raça V4 Angel</p>
-                <span class="preco">R$ 21,59</span>
-                <button class="btn-detalhes">Ver Detalhes</button>
+                <div class="card-img"></div>
+                <div class="card-info">
+                    <h3>Angel V4</h3>
+                    <div class="preco-tag">R$ 21,59</div>
+                    <button class="btn-card">VER DETALHES</button>
+                </div>
             </div>
 
             <div class="card" onclick="abrirModal('cyborg')">
-                <div class="img-placeholder"></div>
-                <p>Raça V4 Cyborg</p>
-                <span class="preco">R$ 21,59</span>
-                <button class="btn-detalhes">Ver Detalhes</button>
+                <div class="card-img"></div>
+                <div class="card-info">
+                    <h3>Cyborg V4</h3>
+                    <div class="preco-tag">R$ 21,59</div>
+                    <button class="btn-card">VER DETALHES</button>
+                </div>
             </div>
 
-             <div class="card" onclick="abrirModal('draco')">
-                <div class="img-placeholder"></div>
+            <div class="card" onclick="abrirModal('draco')">
+                <div class="card-img"></div>
+                <div class="card-info">
+                    <h3>Draco V4</h3>
+                    <div class="preco-tag">R$ 21,59</div>
+                    <button class="btn-card">VER DETALHES</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-box">
+            <button class="btn-fechar" onclick="fecharModal()">&times;</button>
+            
+            <div class="modal-body">
+                <div class="modal-esquerda">
+                    <div class="modal-imagem-placeholder"></div>
+                </div>
+                
+                <div class="modal-direita">
+                    <h2 id="m-nome">NOME DO ITEM</h2>
+                    <span id="m-stock" class="badge-estoque">Estoque: 0</span>
+                    
+                    <p id="m-desc">Descrição do item aqui...</p>
+                    
+                    <div class="modal-preco-area">
+                        <span class="label">Preço:</span>
+                        <span id="m-preco" class="valor-grande">R$ 00,00</span>
+                    </div>
+
+                    <button class="btn-comprar-final">ADICIONAR AO CARRINHO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
                 <p>Raça V4 Draco</p>
                 <span class="preco">R$ 21,59</span>
                 <button class="btn-detalhes">Ver Detalhes</button>
