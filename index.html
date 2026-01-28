@@ -3,238 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Store | V4 Edition</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css">
+    <title>Bad Idea - Menu Final (TV Effect)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+        :root {
+            --primary-color: #e0e0e0;
+            --bg-color: #050505;
+            --glitch-color: #ff0000;
+            --win-gray: #c0c0c0;
+            --win-blue: #000080;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            font-family: 'VT323', monospace;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- TELA DE "JOGO" PROVISÓRIA --- */
+        #game-screen {
+            display: none; /* Começa escondido */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: black;
+            z-index: 50; /* Abaixo dos efeitos de CRT, mas acima do menu */
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #game-screen h1 {
+            font-size: 5rem;
+            color: white;
+            animation: pulseText 2s infinite;
+        }
+
+        @keyframes pulseText {
+            0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; }
+        }
+
+        /* --- EFEITO DE TV DESLIGANDO --- */
+        .tv-off-effect {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: black;
+            z-index: 1000; /* Acima de tudo */
+            opacity: 0;
+            pointer-events: none;
+            display: none;
+        }
+
+        /* Animação que simula o desligamento */
+        .tv-off-active {
+            display: block;
+            opacity: 1;
+            animation: tvOff 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes tvOff {
+            0% { transform: scale(1, 1); opacity: 0; }
+            40% { transform: scale(1, 0.005); opacity: 1; } /* Vira uma linha fina */
+            100% { transform: scale(0, 0.005); opacity: 1; } /* Vira um ponto e some */
+        }
+
+        /* --- RESTO DOS ESTILOS DO MENU --- */
+        
+        #menu-wrapper {
+            width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: flex-start;
+        }
+
+        /* Overlay Vermelho (Terror) */
+        #red-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #ff0000; opacity: 0; z-index: 50; pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+        .red-flash-active { animation: redPulse 0.2s infinite; }
+
+        /* Janela de Créditos */
+        #credits-window {
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 350px; background-color: var(--win-gray);
+            border: 2px solid; border-color: #fff #000 #000 #fff;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.8); z-index: 200;
+            color: black; font-family: 'Courier New', Courier, monospace;
+        }
+        .win-title-bar { background: var(--win-blue); padding: 4px; display: flex; justify-content: space-between; align-items: center; color: white; font-weight: bold; font-size: 14px; }
+        .win-controls { display: flex; gap: 2px; }
+        .win-btn { width: 20px; height: 18px; background: var(--win-gray); border: 1px solid; border-color: #fff #000 #000 #fff; font-size: 10px; display: flex; justify-content: center; align-items: center; cursor: pointer; color: black; font-weight: bold; }
+        .win-btn:active { border-color: #000 #fff #fff #000; }
+        .win-content { padding: 20px; text-align: center; }
+        .dev-name { font-size: 1.5rem; font-weight: bold; margin-bottom: 5px; text-transform: uppercase; }
+        .dev-role { font-size: 0.9rem; margin-bottom: 20px; font-style: italic; }
+        .win-note { font-size: 0.7rem; color: #555; margin-top: 10px; border-top: 1px solid #888; padding-top: 5px; }
+
+        /* Backgrounds e Efeitos */
+        #bg-gif-layer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+            background-image: url('https://i.gifer.com/7h0l.gif'); 
+            background-position: center center; background-size: cover;
+            opacity: 0.3; filter: grayscale(100%) contrast(120%);
+        }
+        .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 90%); z-index: 10; pointer-events: none; }
+        .scanlines { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.5)); background-size: 100% 4px; z-index: 9; pointer-events: none; animation: scrollScan 10s linear infinite; }
+        .noise { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 15; opacity: 0.15; pointer-events: none; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAA5OTkAAABMTExERERmZmYzMzPMzMxmoqOkAAAACHRSTlMzAPcTxfzdOwd2f8oAAAAJcEhZcwAAFiUAABYlAUlSJPAAAABWSURBVDjL7c6xDQAgDwqVLsA2/yY0CBNQxQo695+sIOFp8r09Pc7whKdZ3+l2h9sdbne43eF2h9sdbne43eF2h9sdbne43eF2h9sdbne43eF2h9sdbne43eF2h9sdbne4H7g5XwF6287aAAAAAElFTkSuQmCC'); background-size: 150px 150px; animation: noiseAnim 0.1s steps(4) infinite; }
+
+        /* Menu Container */
+        .container { position: relative; margin-left: 10%; z-index: 20; width: 600px; }
+        .game-title { font-size: 6rem; line-height: 0.9; margin-bottom: 60px; text-transform: uppercase; position: relative; text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8); animation: titleFlicker 4s infinite; transition: color 0.1s; }
+        .horror-active { color: red !important; text-shadow: 4px 0 10px darkred !important; animation: violentShake 0.1s infinite !important; font-size: 5rem !important; }
+        .menu-list { list-style: none; font-size: 2.5rem; }
+        .menu-item { margin-bottom: 20px; cursor: pointer; position: relative; padding-left: 40px; transition: color 0.1s; opacity: 0.8; text-shadow: 2px 2px 4px black; }
+        .menu-item:hover { opacity: 1; text-shadow: 0 0 8px #fff; transform: translateX(5px); }
+        .menu-item:hover::before { content: ">>"; position: absolute; left: 0; animation: blinkArrow 0.2s infinite; }
+        .version { position: fixed; bottom: 20px; right: 20px; opacity: 0.6; font-size: 1.2rem; z-index: 20; text-shadow: 1px 1px 2px black; }
+
+        @keyframes scrollScan { 0% { background-position: 0 0; } 100% { background-position: 0 100%; } }
+        @keyframes noiseAnim { 0% { background-position: 0 0; } 25% { background-position: -10% 5%; } 50% { background-position: 15% -10%; } 75% { background-position: -5% 15%; } 100% { background-position: 0 0; } }
+        @keyframes titleFlicker { 0%, 100% { opacity: 1; transform: skewX(0deg); } 5% { opacity: 0.8; transform: skewX(2deg); } 15% { opacity: 0.4; transform: skewX(-5deg); text-shadow: 4px 0 var(--glitch-color); } 16% { opacity: 1; transform: skewX(0deg); text-shadow: 2px 2px 0 rgba(0,0,0,0.8); } }
+        @keyframes blinkArrow { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes redPulse { 0% { opacity: 0; } 50% { opacity: 0.25; } 100% { opacity: 0; } }
+        @keyframes violentShake { 0% { transform: translate(1px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 30% { transform: translate(3px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(1deg); } 50% { transform: translate(-1px, 2px) rotate(-1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(3px, 1px) rotate(-1deg); } 80% { transform: translate(-1px, -1px) rotate(1deg); } 90% { transform: translate(1px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }
+    </style>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <a href="#">Loja</a>
-            <a href="#">Rankings</a>
-            <a href="#" class="nav-cart">Carrinho</a>
-        </nav>
-    </header>
+    <div class="tv-off-effect" id="tv-effect"></div>
 
-    <main class="hero">
-        <div class="hero-content">
-            <h1>DARK <span class="destaque-roxo">STORE</span></h1>
-            <p>Domine o Blox Fruits com a elite das Raças V4.</p>
-            <button class="btn-neon-main">ACESSAR CATÁLOGO</button>
+    <div id="red-overlay"></div>
+
+    <div id="credits-window">
+        <div class="win-title-bar">
+            <span>Creditos</span>
+            <div class="win-controls">
+                <div class="win-btn" onclick="fecharCreditos()">_</div>
+                <div class="win-btn">□</div>
+                <div class="win-btn" onclick="fecharCreditos()">X</div>
+            </div>
         </div>
-    </main>
-
-    <section class="vitrine">
-        <div class="titulo-area">
-            <h2>RAÇAS <span class="outline">V4</span></h2>
-            <div class="linha-decorativa"></div>
-        </div>
-
-        <div class="grid-produtos">
-            
-            <div class="card" onclick="abrirModal('ghoul')">
-                <div class="card-img" style="background-image: url('https://pin.it/7tQlShXSK');"></div>
-                <div class="card-info">
-                    <h3>Ghoul V4</h3>
-                    <div class="preco-tag">R$ 21,59</div>
-                    <button class="btn-card">VER DETALHES</button>
-                </div>
-            </div>
-
-            <div class="card" onclick="abrirModal('human')">
-                <div class="card-img" style="background-image: url('https://pin.it/5PEJzABx8');"></div>
-                <div class="card-info">
-                    <h3>Human V4</h3>
-                    <div class="preco-tag">R$ 21,59</div>
-                    <button class="btn-card">VER DETALHES</button>
-                </div>
-            </div>
-
-            <div class="card" onclick="abrirModal('shark')">
-                <div class="card-img" style="background-image: url('https://placehold.co/400x300/0f0f0f/0088ff?text=SHARK+V4');"></div>
-                <div class="card-info">
-                    <h3>Shark V4</h3>
-                    <div class="preco-tag">R$ 21,59</div>
-                    <button class="btn-card">VER DETALHES</button>
-                </div>
-            </div>
-
-            <div class="card" onclick="abrirModal('mink')">
-                <div class="card-img" style="background-image: url('https://placehold.co/400x300/0f0f0f/ffee00?text=MINK+V4');"></div>
-                <div class="card-info">
-                    <h3>Mink V4</h3>
-                    <div class="preco-tag">R$ 21,59</div>
-                    <button class="btn-card">VER DETALHES</button>
-                </div>
-            </div>
-
-            <div class="card" onclick="abrirModal('angel')">
-                <div class="card-img" style="background-image: url('https://placehold.co/400x300/0f0f0f/ffffff?text=ANGEL+V4');"></div>
-                <div class="card-info">
-                    <h3>Angel V4</h3>
-                    <div class="preco-tag">R$ 21,59</div>
-                    <button class="btn-card">VER DETALHES</button>
-                </div>
-            </div>
-
-            <div class="card" onclick="abrirModal('cyborg')">
-                <div class="card-img" style="background-image: url('https://placehold.co/400x300/0f0f0f/b026ff?text=CYBORG+V4');"></div>
-                <div class="card-info">
-                    <h3>Cyborg V4</h3>
-                    <div class="preco-tag">R$ 21,59</div>
-                    <button class="btn-card">VER DETALHES</button>
-                </div>
-            </div>
-
-            <div class="card" onclick="abrirModal('draco')">
-                <div class="card-img" style="background-image: url('https://placehold.co/400x300/0f0f0f/ff0000?text=DRACO+V4');"></div>
-                <div class="card-info">
-                    <h3>Draco V4</h3>
-                    <div class="preco-tag">R$ 21,59</div>
-                    <button class="btn-card">VER DETALHES</button>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <div id="modal-overlay" class="modal-overlay">
-        <div class="modal-box">
-            <button class="btn-fechar" onclick="fecharModal()">&times;</button>
-            
-            <div class="modal-body">
-                <div class="modal-esquerda">
-                    <div class="modal-imagem-placeholder"></div>
-                </div>
-                
-                <div class="modal-direita">
-                    <h2 id="m-nome">NOME DO ITEM</h2>
-                    <span id="m-stock" class="badge-estoque">Estoque: 0</span>
-                    
-                    <p id="m-desc">Descrição do item aqui...</p>
-                    
-                    <div class="modal-preco-area">
-                        <span class="label">Preço:</span>
-                        <span id="m-preco" class="valor-grande">R$ 00,00</span>
-                    </div>
-
-                    <button class="btn-comprar-final">ADICIONAR AO CARRINHO</button>
-                </div>
-            </div>
+        <div class="win-content">
+            <div class="dev-name">Victor Hugo</div>
+            <div class="dev-role">(Developer, programador e Criador)</div>
+            <div class="win-note">Só por enquanto...</div>
         </div>
     </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
-                <div class="card-info">
-                    <h3>Angel V4</h3>
-                    <div class="preco-tag">R$ 21,59</div>
-                    <button class="btn-card">VER DETALHES</button>
-                </div>
-            </div>
-
-            <div class="card" onclick="abrirModal('cyborg')">
-                <div class="card-img"></div>
-                <div class="card-info">
-                    <h3>Cyborg V4</h3>
-                    <div class="preco-tag">R$ 21,59</div>
-                    <button class="btn-card">VER DETALHES</button>
-                </div>
-            </div>
-
-            <div class="card" onclick="abrirModal('draco')">
-                <div class="card-img"></div>
-                <div class="card-info">
-                    <h3>Draco V4</h3>
-                    <div class="preco-tag">R$ 21,59</div>
-                    <button class="btn-card">VER DETALHES</button>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <div id="modal-overlay" class="modal-overlay">
-        <div class="modal-box">
-            <button class="btn-fechar" onclick="fecharModal()">&times;</button>
-            
-            <div class="modal-body">
-                <div class="modal-esquerda">
-                    <div class="modal-imagem-placeholder"></div>
-                </div>
-                
-                <div class="modal-direita">
-                    <h2 id="m-nome">NOME DO ITEM</h2>
-                    <span id="m-stock" class="badge-estoque">Estoque: 0</span>
-                    
-                    <p id="m-desc">Descrição do item aqui...</p>
-                    
-                    <div class="modal-preco-area">
-                        <span class="label">Preço:</span>
-                        <span id="m-preco" class="valor-grande">R$ 00,00</span>
-                    </div>
-
-                    <button class="btn-comprar-final">ADICIONAR AO CARRINHO</button>
-                </div>
-            </div>
-        </div>
+    <div id="game-screen">
+        <h1>Jogo</h1>
     </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
-                <p>Raça V4 Draco</p>
-                <span class="preco">R$ 21,59</span>
-                <button class="btn-detalhes">Ver Detalhes</button>
-            </div>
+    <div id="bg-gif-layer"></div>
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+    <div class="noise"></div>
 
-        </div>
-    </section>
-
-    <div id="modalProduto" class="modal-fundo">
-        <div class="modal-conteudo">
-            <span class="fechar" onclick="fecharModal()">&times;</span>
+    <div id="menu-wrapper">
+        <div class="container">
+            <h1 class="game-title" id="main-title">Bad<br>Idea</h1>
             
-            <div class="modal-flex">
-                <div class="modal-img-area">
-                    <div id="modal-img-box"></div> 
-                </div>
-                
-                <div class="modal-info-area">
-                    <h2 id="modal-nome">Nome do Produto</h2>
-                    <p id="modal-desc">Descrição detalhada vai aqui.</p>
-                    
-                    <div class="info-extra">
-                        <span id="modal-stock" class="stock-badge">Estoque: 0</span>
-                    </div>
-
-                    <h3 id="modal-preco">R$ 00,00</h3>
-                    
-                    <button class="btn-comprar-modal">ADICIONAR AO CARRINHO</button>
-                </div>
-            </div>
+            <ul class="menu-list">
+                <li class="menu-item" onclick="iniciarJogo()">Jogar</li>
+                <li class="menu-item" onclick="abrirCreditos()">Créditos</li>
+                <li class="menu-item" onclick="btnAction('Configuracoes')">Configurações</li>
+            </ul>
         </div>
+        <div class="version">v.0.4.0 (TV Start)</div>
     </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <script>
+        // --- FUNÇÃO PARA INICIAR O JOGO ---
+        function iniciarJogo() {
+            // 1. Toca a animação de TV desligando
+            const tvEffect = document.getElementById('tv-effect');
+            tvEffect.classList.add('tv-off-active');
 
-             <div class="card">
-                <div class="img-placeholder"></div>
-                <p>Raça V4 Draco</p>
-                <span class="preco">R$ 21,59</span>
-                <button class="btn-comprar">Comprar</button>
-            </div>
+            // 2. Depois que a animação termina (400ms), troca as telas
+            setTimeout(() => {
+                // Esconde o menu e o fundo antigo
+                document.getElementById('menu-wrapper').style.display = 'none';
+                document.getElementById('bg-gif-layer').style.display = 'none'; // Se quiser manter o GIF no jogo, remova essa linha
+                
+                // Mostra a tela do jogo
+                const gameScreen = document.getElementById('game-screen');
+                gameScreen.style.display = 'flex';
+                
+                // Remove o efeito preto da TV para revelar o jogo
+                // Mas precisa ser rápido, senão o preto some do nada
+                // Vamos deixar o preto cobrindo enquanto trocamos, e depois dar fade-out no preto se quiser
+                // Mas o efeito "TV Off" deixa a tela preta no final.
+                
+            }, 400); // Sincronizado com o CSS animation
+        }
 
-        </div>
-    </section>
+        // JANELA DE CRÉDITOS
+        const creditsWindow = document.getElementById('credits-window');
+        function abrirCreditos() { creditsWindow.style.display = 'block'; }
+        function fecharCreditos() { creditsWindow.style.display = 'none'; }
 
+        // OUTROS BOTÕES
+        function btnAction(acao) {
+            console.log(acao);
+            if(acao === 'Configuracoes') alert("Configurações bloqueadas.");
+        }
+
+        // EVENTO DE TERROR
+        const titleElement = document.getElementById('main-title');
+        const redOverlay = document.getElementById('red-overlay');
+        const originalText = "Bad<br>Idea"; 
+
+        function triggerHorrorEvent() {
+            // Se o jogo já começou (menu sumiu), não faz o susto
+            if(document.getElementById('menu-wrapper').style.display === 'none') return;
+
+            titleElement.innerHTML = "Humanity<br>dead forever";
+            titleElement.classList.add('horror-active');
+            redOverlay.classList.add('red-flash-active');
+
+            setTimeout(() => {
+                titleElement.innerHTML = originalText;
+                titleElement.classList.remove('horror-active');
+                redOverlay.classList.remove('red-flash-active');
+            }, 5000);
+        }
+
+        setInterval(triggerHorrorEvent, 60000);
+    </script>
 </body>
 </html>
